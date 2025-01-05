@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Solution {
+public class Solution { // 2회차 풀이
     public int[] solution(int []arr) {
         Stack<Integer> st = new Stack<>();
 
