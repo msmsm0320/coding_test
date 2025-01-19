@@ -2,7 +2,6 @@ package 깊이_너비우선탐색;
 
 import java.util.*;
 
-
 class Solution {
 
     static boolean visited[];
