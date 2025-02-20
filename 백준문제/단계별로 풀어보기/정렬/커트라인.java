@@ -1,8 +1,7 @@
 import java.io.*;
-import java.nio.Buffer;
 import java.util.*;
 
-public class BOJ_25305_커트라인 {
+public class 커트라인 {
     public static void main(String[] args) throws IOException {
         BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
