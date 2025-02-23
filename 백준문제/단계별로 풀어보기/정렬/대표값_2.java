@@ -22,6 +22,5 @@ public class 대표값_2 {
         bw.flush();
         bw.close();
         br.close();
-
     }
 }
