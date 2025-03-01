@@ -39,6 +39,7 @@ public class 나이순_정렬_review {
         for(int j = 0; j<N; j++){
             sb.append(list.get(j).age +" "+ list.get(j).name).append("\n");
         }
+
         bw.write(sb.toString());
         bw.flush();
         bw.close();
