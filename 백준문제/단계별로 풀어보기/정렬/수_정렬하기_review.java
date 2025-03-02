@@ -20,6 +20,7 @@ public class 수_정렬하기_review {
             bw.write(k + "\n");
             bw.flush();
         }
+
         bw.close();
         br.close();
     }
