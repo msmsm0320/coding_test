@@ -29,7 +29,7 @@ public class 좌표_정렬하기_2_review {
         StringBuilder sb = new StringBuilder();
 
         for(int j = 0; j<N; j++){
-            sb.append(arr[j][0] + " " + arr[j][1]).append("\n");
+            sb.append(arr[j][0]).append(" ").append("\n");
         }
         bw.write(sb.toString());
         bw.flush();
