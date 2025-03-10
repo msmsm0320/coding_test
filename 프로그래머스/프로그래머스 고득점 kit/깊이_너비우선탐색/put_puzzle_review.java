@@ -2,7 +2,8 @@ import java.util.*;
 
 class Solution {
 
-    int[] dx = {-1, 0, 1 , 0}; // 상하좌우
+    // x축 이동, Y축 이동 고려
+    int[] dx = {-1, 0, 1 , 0};
     int[] dy = {0, 1, 0, -1};
 
     public int solution(int[][] game_board, int[][] table) {
