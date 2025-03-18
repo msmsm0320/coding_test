@@ -25,7 +25,7 @@ public class 블랙잭_review {
             for(int k = j+1; k<N; k++){
                 for(int l = k+1; l<N; l++){
                     sum = cards[j] + cards[k] + cards[l];
-                    if(sum<= M){
+                    if(sum <= M && sum > max){
                         max = sum;
                     }
                 }
