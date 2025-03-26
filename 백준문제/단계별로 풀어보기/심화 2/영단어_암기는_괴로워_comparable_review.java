@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class 영단어_암기는_괴로워_review {
+public class 영단어_암기는_괴로워_comparable_review {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -22,12 +22,16 @@ public class 영단어_암기는_괴로워_review {
 
         List<String> list = new ArrayList<>(hm.keySet());
 
-        Comparator<String> comp = Comparator
-                .comparingInt((String word) ->hm.get(word))
-                .thenComparing((String word) -> word.length()).reversed()
-                .thenComparing(Comparator.naturalOrder());
-
-        list.sort(comp);
+        list.sort((o1, o2) ->{
+            if (!hm.get(o1).equals(hm.get(o2))) {
+                return hm.get(o2) - hm.get(o1);
+            } else if (o1.length() != o2.length()){
+                return o2.length() - o1.length();
+            }else{
+                return o1.compareTo(o2);
+            }
+                }
+        );
 
         StringBuilder sb = new StringBuilder();
         for (String s : list) {
