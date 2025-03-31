@@ -1,5 +1,12 @@
 # Java 컴파일 결과 무시
 *.class
+!lib.class
+temp-*.json
+/build.log
+/build.log
+temp/
+bin/*.txt
+doc/**/*.pdf
 
 # IDE 설정 파일 무시 (옵션)
 .idea/
