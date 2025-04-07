@@ -1,20 +1,17 @@
 import java.io.*;
+import java.util.StringTokenizer;
 
 public class 재귀의_귀재_review {
+
     public static int count;
-    public static int isPalindrome(int left,int right, String str){
-        if(left>=right){
-            count++;
+
+    public static int isPalindrome(String s, int left, int right){
+        count++;
+        if(left >= right){
             return 1;
         }
-
-        if(str.charAt(left) == str.charAt(right)){
-            count++;
-            return isPalindrome(left+1,right-1,str);
-        }else{
-            count++;
-            return 0;
-        }
+        if(s.charAt(left) == s.charAt(right)) return isPalindrome(s,left+1, right-1) ;
+        return 0;
     }
 
     public static void main(String[] args) throws IOException {
@@ -22,14 +19,15 @@ public class 재귀의_귀재_review {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         int T = Integer.parseInt(br.readLine());
 
+
         StringBuilder sb = new StringBuilder();
-
-        for(int i = 0; i<T; i++){
+        for(int i =0; i<T; i++){
             count = 0;
-            String str = br.readLine();
-            int pal = isPalindrome(0,str.length()-1,str);
+            String st = br.readLine();
 
-            sb.append(pal).append(" ").append(count).append("\n");
+            int result = isPalindrome(st,0,st.length()-1);
+
+            sb.append(result).append(" ").append(count).append("\n");
         }
 
         bw.write(sb.toString());
@@ -38,4 +36,5 @@ public class 재귀의_귀재_review {
         br.close();
 
     }
+
 }
