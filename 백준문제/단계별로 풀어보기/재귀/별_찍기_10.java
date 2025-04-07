@@ -53,7 +53,6 @@ public class 별_찍기_10 {
         bw.flush();
         bw.close();
         br.close();
-
     }
 
 }
