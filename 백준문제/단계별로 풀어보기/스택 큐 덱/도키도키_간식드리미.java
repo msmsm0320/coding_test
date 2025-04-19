@@ -16,8 +16,9 @@ public class 도키도키_간식드리미 {
             int num = Integer.parseInt(st.nextToken());
 
             if (num == count) {
+
                 count++;
-                // 간식 줄 수 있으면 바로 줌
+
                 while (!stack.isEmpty() && stack.peek() == count) {
                     stack.pop();
                     count++;
