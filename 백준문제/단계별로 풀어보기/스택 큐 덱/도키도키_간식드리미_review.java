@@ -10,29 +10,21 @@ public class 도키도키_간식드리미_review {
 
         Stack<Integer> stack = new Stack<>();
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         int count = 1;
-
-        for (int i = 0; i < N; i++) {
-            int num = Integer.parseInt(st.nextToken());
-
-            if (num == count) {
+        for(int i = 0; i<N; i++){
+            int k = Integer.parseInt(st.nextToken());
+            if(k == count){
                 count++;
-                // 간식 줄 수 있으면 바로 줌
-                while (!stack.isEmpty() && stack.peek() == count) {
+                while(!stack.isEmpty() && stack.peek() == count){
                     stack.pop();
                     count++;
                 }
-            } else {
-                stack.push(num);
+            }else{
+                stack.push(k);
             }
         }
-
-        if (stack.isEmpty()) {
-            bw.write("Nice");
-        } else {
-            bw.write("Sad");
-        }
-
+        bw.write(stack.isEmpty()?"Nice":"Sad");
         bw.flush();
         bw.close();
         br.close();
