@@ -1,31 +1,39 @@
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 
 public class 잃어버린_괄호 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        String input = br.readLine(); // 수식 입력 받기
+        String exp = br.readLine();
 
-        // '-' 기준으로 나누기
-        String[] minusSplit = input.split("-");
+        String[] minusSplit =exp.split("-");
 
         int result = 0;
 
-        for (int i = 0; i < minusSplit.length; i++) {
-            String[] plusSplit = minusSplit[i].split("\\+"); // '+' 기준으로 또 나누기
+        for(int i = 0; i<minusSplit.length; i++){
+            String[] plusSplit = minusSplit[i].split("\\+");
+
             int sum = 0;
-            for (String s : plusSplit) {
-                sum += Integer.parseInt(s); // 각각 더해줌
+
+            for(String num : plusSplit){
+                sum += Integer.parseInt(num);
             }
 
-            if (i == 0) {
-                result += sum; // 첫 번째 그룹은 더함
-            } else {
-                result -= sum; // 이후는 모두 빼줌
+            if(i == 0){
+                result += sum;
+            } else{
+                result -= sum;
             }
         }
 
-        System.out.println(result);
+        bw.write(String.valueOf(result));
+        bw.flush();
+        bw.close();
+        br.close();
     }
 }
