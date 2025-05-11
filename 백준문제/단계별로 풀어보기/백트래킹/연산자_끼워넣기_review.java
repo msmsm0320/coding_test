@@ -3,18 +3,55 @@ import java.util.StringTokenizer;
 
 public class 연산자_끼워넣기_review {
 
-    public static int MAX = Integer.MIN_VALUE;
-    public static int MIN = Integer.MAX_VALUE;
-    public static int[] operator = new int[4];
+    public static int Max = Integer.MIN_VALUE;
+    public static int Min = Integer.MAX_VALUE;
     public static int[] number;
-    public static int N;
+    public static int[] sign;
+
+    public static void dfs(int depth, int length, int value){
+        if(depth == length){
+            Max = Math.max(Max, value);
+            Min = Math.min(Min, value);
+            return;
+        }
+
+        for(int i = 0; i<4; i++) {
+
+            // case로 sign을 받는다.
+            if (sign[i] > 0) {
+                sign[i]--;
+                switch (i) {
+
+                    case 0 : {
+                        dfs(depth+1, length, value+number[depth]);
+                        break;
+                    }
+                    case 1 : {
+                        dfs(depth+1, length, value-number[depth]);
+                        break;
+                    }
+                    case 2 : {
+                        dfs(depth+1, length, value*number[depth]);
+                        break;
+                    }
+                    case 3 : {
+                        dfs(depth+1, length, value/number[depth]);
+                        break;
+                    }
+                }
+                sign[i]++;
+            }
+        }
+    }
 
     public static void main(String[] args) throws IOException {
+
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        N = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
         number = new int[N];
+        sign = new int[4];
 
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i = 0; i<N; i++){
@@ -22,42 +59,16 @@ public class 연산자_끼워넣기_review {
         }
 
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i<4; i++){
-            operator[i] = Integer.parseInt(st.nextToken());
+        for(int i = 0; i<4; i++){
+            sign[i] = Integer.parseInt(st.nextToken());
         }
 
-        dfs(number[0], 1);
-
-        bw.write(MAX + "\n");
-        bw.write(String.valueOf(MIN));
+        dfs(1,N,number[0]);
+        bw.write(Max + "\n");
+        bw.write(String.valueOf(Min));
         bw.flush();
         bw.close();
         br.close();
-
     }
 
-    public static void dfs(int num, int idx){
-        if (idx == N){
-            MAX = Math.max(MAX, num);
-            MIN = Math.min(MIN, num);
-            return;
-        }
-
-        for(int i = 0; i<4; i++){
-            if (operator[i] > 0){
-                operator[i]--;
-
-                switch(i){
-
-                    case 0: dfs(num + number[idx], idx + 1); break;
-                    case 1: dfs(num - number[idx], idx + 1); break;
-                    case 2: dfs(num * number[idx], idx + 1); break;
-                    case 3: dfs(num / number[idx], idx + 1); break;
-
-                }
-
-                operator[i]++;
-            }
-        }
-    }
 }
