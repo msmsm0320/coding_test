@@ -1,29 +1,35 @@
-import java.util.*;
-
 class Solution {
-
     public int solution(int[] bandage, int health, int[][] attacks) {
-        int cnt = bandage[0];
-        int now = health;
-        int std = 0;
+        int maxHealth = health;
+        int curHealth = health;
+        int curTime = 0;
+        int combo = 0;
 
-        int v1, v2;
-        for (int[] atk: attacks) {
-            if (now <= 0) {
-                return -1;
+        for (int i = 0; i < attacks.length; i++) {
+            int nextAttackTime = attacks[i][0];
+            int damage = attacks[i][1];
+
+            int duration = nextAttackTime - curTime - 1;
+            if (duration > 0) {
+
+                curHealth += bandage[1] * duration;
+                combo += duration;
+
+                int fullComboCount = combo / bandage[0];
+                curHealth += fullComboCount * bandage[2];
+
+                if (curHealth > maxHealth) {
+                    curHealth = maxHealth;
+                }
             }
 
-            v1 = atk[0] - std - 1;
-            v2 = v1 / cnt;
+            curHealth -= damage;
+            if (curHealth <= 0) return -1;
 
-            
-            std = atk[0];
-            now = Math.min(health, now + (v1 * bandage[1]));
-            now = Math.min(health, now + (v2 * bandage[2]));
-
-            now -= atk[1];
+            combo = 0;
+            curTime = nextAttackTime;
         }
 
-        return now <= 0 ? -1 : now;
+        return curHealth;
     }
 }
