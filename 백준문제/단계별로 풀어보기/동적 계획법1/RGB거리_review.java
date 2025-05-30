@@ -27,7 +27,6 @@ public class RGB거리_review {
                         house[i][2] = Math.min(house[i-1][1] + curCost, house[i-1][0] + curCost);
                         break;
                 }
-
             }
         }
         int result = Math.min(house[N-1][0], house[N-1][1]);
