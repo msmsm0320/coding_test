@@ -31,7 +31,6 @@ public class 신나는_함수_실행 {
                     .append(") = ").append(n).append("\n");
         }
 
-
         System.out.println(sb);
 
     }
