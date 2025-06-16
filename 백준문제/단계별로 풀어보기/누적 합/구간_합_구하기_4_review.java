@@ -10,22 +10,26 @@ public class 구간_합_구하기_4_review {
         int M = Integer.parseInt(st.nextToken());
 
         int arr[] = new int[N+1];
-        st = new StringTokenizer(br.readLine());
 
         arr[0] = 0;
-
-        for(int i = 0; i<N; i++){
-            arr[i+1] = arr[i] + Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
+        for(int i = 1; i<N+1; i++){
+            arr[i] = arr[i-1]+Integer.parseInt(st.nextToken());
         }
 
         StringBuilder sb = new StringBuilder();
 
-        for(int i = 0; i<M; i++){
+        for(int k = 0; k<M; k++){
             st = new StringTokenizer(br.readLine());
 
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            int sum = arr[b] - arr[a-1];
+            int sum = 0;
+
+            int i = Integer.parseInt(st.nextToken());
+            int j = Integer.parseInt(st.nextToken());
+
+
+            sum = arr[j] - arr[i-1];
+
             sb.append(sum).append("\n");
         }
 
@@ -33,6 +37,6 @@ public class 구간_합_구하기_4_review {
         bw.write(sb.toString());
         bw.flush();
         bw.close();
-
+        br.close();
     }
 }
