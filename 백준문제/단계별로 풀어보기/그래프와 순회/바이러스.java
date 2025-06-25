@@ -6,6 +6,22 @@ public class 바이러스 {
     static boolean[] visited;
     static List[] computers;
 
+    private static void bfs(int start) {
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.add(start);
+
+        while(!queue.isEmpty()) {
+            int now = queue.poll();
+            if(!visited[now]) {
+                count++;
+                visited[now] = true;
+                for(int i=0; i<computers[now].size(); i++) {
+                    queue.add((int)computers[now].get(i));
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         num = Integer.parseInt(br.readLine());
@@ -28,23 +44,9 @@ public class 바이러스 {
 
         bfs(1);
 
-        System.out.println(count-1); // 시작 지점 카운트 빼주기
+        System.out.println(count-1);
         br.close();
     }
 
-    private static void bfs(int start) {
-        Queue<Integer> queue = new LinkedList<Integer>();
-        queue.add(start);
 
-        while(!queue.isEmpty()) {
-            int now = queue.poll();
-            if(!visited[now]) {
-                count++;
-                visited[now] = true;
-                for(int i=0; i<computers[now].size(); i++) {
-                    queue.add((int)computers[now].get(i));
-                }
-            }
-        }
-    }
 }
