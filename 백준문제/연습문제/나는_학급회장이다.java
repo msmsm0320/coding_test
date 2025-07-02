@@ -1,52 +1,68 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.StringTokenizer;
 
 public class 나는_학급회장이다 {
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int[] candidate = new int[3];
+        int[] squared = new int[3];
 
         int N = Integer.parseInt(br.readLine());
 
-        int[] score = new int[4];
-        int[] count3 = new int[4];
-        int[] count2 = new int[4];
-
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            for (int j = 1; j <= 3; j++) {
-                int s = Integer.parseInt(st.nextToken());
-                score[j] += s;
-                if (s == 3) count3[j]++;
-                else if (s == 2) count2[j]++;
-            }
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            candidate[0] += a;
+            candidate[1] += b;
+            candidate[2] += c;
+
+            squared[0] += a * a;
+            squared[1] += b * b;
+            squared[2] += c * c;
         }
 
-        int maxScore = Math.max(score[1], Math.max(score[2], score[3]));
+        int maxScore = Math.max(candidate[0], Math.max(candidate[1], candidate[2]));
 
-        int tieCount = 0;
-        int winner = 0;
-
-        for (int i = 1; i <= 3; i++) {
-            if (score[i] == maxScore) {
-                tieCount++;
-                if (winner == 0) winner = i;
-                else {
-                    if (count3[i] > count3[winner]) {
-                        winner = i;
-                    } else if (count3[i] == count3[winner]) {
-                        if (count2[i] > count2[winner]) {
-                            winner = i;
-                        } else if (count2[i] == count2[winner]) {
-                            winner = 0;
-                        }
-                    }
+        if (countOccurrences(candidate, maxScore) == 1) {
+            for (int i = 0; i < candidate.length; i++) {
+                if (candidate[i] == maxScore) {
+                    bw.write((i + 1) + " " + maxScore + "\n");
+                    break;
                 }
             }
+        } else {
+            int maxSquared = Math.max(squared[0], Math.max(squared[1], squared[2]));
+            int elected = -1;
+
+            for (int i = 0; i < squared.length; i++) {
+                if (squared[i] == maxSquared) {
+                    elected = i;
+                    break;
+                }
+            }
+
+            if (countOccurrences(squared, maxSquared) > 1) {
+                bw.write("0 " + candidate[elected] + "\n");
+            } else {
+                bw.write((elected + 1) + " " + candidate[elected] + "\n");
+            }
         }
 
-        System.out.println(winner + " " + maxScore);
+        bw.flush();
+        br.close();
+        bw.close();
+    }
+
+    private static int countOccurrences(int[] array, int value) {
+        int count = 0;
+        for (int v : array) {
+            if (v == value) count++;
+        }
+        return count;
     }
 }
