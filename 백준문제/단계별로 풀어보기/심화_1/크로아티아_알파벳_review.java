@@ -1,2 +1,2 @@
-public class 크로아티아_알파벳 {
+public class 크로아티아_알파벳_review {
 }
