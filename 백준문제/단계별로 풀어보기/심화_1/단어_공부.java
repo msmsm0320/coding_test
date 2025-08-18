@@ -1,37 +1,39 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.HashMap;
 
 public class 단어_공부 {
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int[] arr = new int[26];
-        String s = br.readLine();
+        String target = br.readLine().toUpperCase();
 
+        int arr[] = new int[26];
 
-        for (int i = 0; i < s.length(); i++) {
-            if ('a' <= s.charAt(i) && s.charAt(i) <= 'z') {
-                arr[s.charAt(i) - 97]++;
-            } else {
-                arr[s.charAt(i) - 65]++;
-            }
+        for(int i = 0; i < target.length(); i++){
+            int num = target.charAt(i) - 'A';
+            arr[num]++;
         }
-        int max = -1;
-        char ch = '?';
-        for (int i = 0; i < 26; i++) {
 
-            if (arr[i] > max) {
+        int max = Integer.MIN_VALUE;
+        char answer = '?';
+
+        for(int i = 0; i < arr.length; i++){
+            if(max < arr[i]){
                 max = arr[i];
-                ch = (char) (i + 65);
-            }
-            else if (arr[i] == max) {
-                ch = '?';
+                answer = (char)(i + 'A');
+            } else if(max == arr[i]) {
+                answer = '?';
             }
         }
-        System.out.print(ch);
+
+        bw.write(answer);
+        bw.flush();
+        bw.close();
+        br.close();
+
     }
 
 }
