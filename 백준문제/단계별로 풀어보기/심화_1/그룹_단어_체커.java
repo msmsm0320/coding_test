@@ -1,43 +1,43 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class 그룹_단어_체커 {
-
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
     public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-        int count = 0;
         int N = Integer.parseInt(br.readLine());
+        int count = 0;
 
-        for (int i = 0; i < N; i++) {
-            if (check()) {
-                count++;
+        for(int i = 0; i < N; i++){
+            String str = br.readLine();
+            boolean flag = false;
+
+            for(int j = 0; j < str.length()-1; j++){
+                boolean diffch = false;
+                char ch = str.charAt(j);
+
+                for(int l = j+1; l < str.length(); l++){
+                    if(diffch == true && str.charAt(j) == str.charAt(l)){
+                        flag = true;
+                    }
+
+                    if(diffch == false && str.charAt(j) != str.charAt(l)){
+                        diffch = true;
+                        ch = str.charAt(l);
+                    }
+                }
+
             }
+
+            if(!flag) count++;
+
+
         }
-        System.out.print(count);
+
+        bw.write(String.valueOf(count));
+        bw.flush();
+        bw.close();
+        br.close();
     }
 
-    public static boolean check() throws IOException {
-        boolean[] check = new boolean[26];
-        int prev = 0;
-        String str = br.readLine();
-
-        for(int i = 0; i < str.length(); i++) {
-            int now = str.charAt(i);
-
-
-            if (prev != now) {
-                if (!check[now - 'a']) {
-                    check[now - 'a'] = true;
-                    prev = now;
-                }
-                else {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
 }
