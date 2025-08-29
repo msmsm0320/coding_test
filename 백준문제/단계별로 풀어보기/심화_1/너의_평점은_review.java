@@ -1,2 +1,2 @@
-public class 너의_평점은 {
+public class 너의_평점은_review {
 }
