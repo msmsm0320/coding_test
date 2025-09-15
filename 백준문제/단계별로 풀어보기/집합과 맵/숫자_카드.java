@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.StringTokenizer;
 
@@ -14,7 +13,7 @@ public class 숫자_카드 {
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
 
-        for(int i = 0; i < N; i++){
+        for (int i = 0; i < N; i++) {
             cards.add(Integer.parseInt(st.nextToken()));
         }
 
@@ -23,8 +22,8 @@ public class 숫자_카드 {
         StringBuilder sb = new StringBuilder();
 
 
-        for(int i = 0; i < M; i++){
-            if(cards.contains(Integer.parseInt(st.nextToken()))) sb.append(1).append(" ");
+        for (int i = 0; i < M; i++) {
+            if (cards.contains(Integer.parseInt(st.nextToken()))) sb.append(1).append(" ");
             else sb.append(0).append(" ");
         }
 
