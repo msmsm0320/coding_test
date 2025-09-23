@@ -2,21 +2,21 @@ import java.io.*;
 import java.util.*;
 
 public class 바이러스 {
-    static int count, num, connections;
-    static boolean[] visited;
-    static List[] computers;
+    static int[] visited;
+    static int[][] graph;
 
-    private static void bfs(int start) {
-        Queue<Integer> queue = new LinkedList<Integer>();
-        queue.add(start);
+    public static void bfs(int s){
+        Queue<Integer> q = new LinkedList<>();
+        q.add(s);
+        visited[s] = 1;
 
-        while(!queue.isEmpty()) {
-            int now = queue.poll();
-            if(!visited[now]) {
-                count++;
-                visited[now] = true;
-                for(int i=0; i<computers[now].size(); i++) {
-                    queue.add((int)computers[now].get(i));
+        while(!q.isEmpty()){
+            int n = q.poll();
+
+            for(int i = 1; i < graph.length; i++){
+                if(visited[i] == 0 && graph[n][i] == 1){
+                    q.add(i);
+                    visited[i] = 1;
                 }
             }
         }
@@ -24,29 +24,37 @@ public class 바이러스 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        num = Integer.parseInt(br.readLine());
-        connections = Integer.parseInt(br.readLine());
-        visited = new boolean[num+1];
-        computers = new List[num+1];
-        count = 0;
-        for(int i=1; i<num+1; i++) {
-            computers[i] = new ArrayList<Integer>();
-        }
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        int N = Integer.parseInt(br.readLine());
+        int M = Integer.parseInt(br.readLine());
+
+        visited = new int[N+1];
+        graph = new int[N+1][N+1];
 
         StringTokenizer st;
-        for(int i=0; i<connections; i++) {
+
+        for(int i = 0; i < M; i++){
             st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            computers[a].add(b);
-            computers[b].add(a);
+
+            int k = Integer.parseInt(st.nextToken());
+            int l = Integer.parseInt(st.nextToken());
+
+            graph[k][l] = 1;
+            graph[l][k] = 1;
         }
 
         bfs(1);
 
-        System.out.println(count-1);
+        int count = 0;
+        for(int i = 2; i < N+1; i++){
+            if(visited[i] == 1) count++;
+        }
+
+        bw.write(String.valueOf(count));
+        bw.flush();
+        bw.close();
         br.close();
     }
-
 
 }
