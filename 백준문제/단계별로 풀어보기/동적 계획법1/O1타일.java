@@ -19,7 +19,7 @@ public class O1타일 {
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
         int N = Integer.parseInt(br.readLine());
-        
+
         dp = new int[N+1];
 
         dp[0] = 1;
