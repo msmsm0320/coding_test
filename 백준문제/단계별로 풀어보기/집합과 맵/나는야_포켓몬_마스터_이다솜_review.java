@@ -1,37 +1,45 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 public class 나는야_포켓몬_마스터_이다솜_review {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        Map<String, Integer> hm = new HashMap<>();
+
+        int count = 1;
+
         StringTokenizer st = new StringTokenizer(br.readLine());
+
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
+
+        for(int i = 0; i < N; i++){
+            String Pocketmon = br.readLine();
+            hm.put(Pocketmon,count++);
+        }
+
         StringBuilder sb = new StringBuilder();
 
-        HashMap<Integer, String> hash1 = new HashMap<Integer, String>();
-        HashMap<String, Integer> hash2 = new HashMap<String, Integer>();
-
-
-        for(int i = 1; i <= N; i++) {
-            String S = br.readLine();
-            hash1.put(i, S);
-            hash2.put(S, i);
-        }
-
-        for(int i = 0; i < M; i++) {
-            String S = br.readLine();
-
-            if(49 <= S.charAt(0) && S.charAt(0) <= 57) {
-                sb.append(hash1.get(Integer.parseInt(S))).append("\n");
-            }else {
-                sb.append(hash2.get(S)).append("\n");
+        for(int j = 0; j < M; j++){
+            String pm = br.readLine();
+            try{
+                int n = Integer.parseInt(pm);
+                for(String key : hm.keySet()){
+                    if(hm.get(key) == n) sb.append(key).append(" ").append("\n");
+                }
+            }catch (NumberFormatException e){
+                sb.append(hm.get(pm)).append(" ").append("\n");
             }
         }
-        System.out.println(sb);
+
+        bw.write(sb.toString());
+        bw.flush();
+        bw.close();
+        br.close();
     }
 }
